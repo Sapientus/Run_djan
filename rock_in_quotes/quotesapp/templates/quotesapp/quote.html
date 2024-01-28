@@ -1,0 +1,36 @@
+{% extends "quotesapp/base.html" %}{% load extract_tags %}
+
+{% block content %}
+
+<form method="POST" action="{% url 'quotesapp:quote' %}" style="color: rgba(255, 255, 255, 0.593);">
+    {% csrf_token %}
+    <div style="padding: 10px">
+        <label> Quote name:
+            {{ form.name }}
+        </label>
+        <span>{{ form.errors.name }}</span>
+    </div>
+    <div style="padding: 10px">
+        <label> Quote description:
+            {{ form.description }}
+        </label>
+        <span>{{ form.errors.description }}</span>
+    </div>
+    <div style="padding: 10px">
+        <label> Quote author:
+            {{ form.author }}
+        </label>
+        <span>{{ form.errors.author }}</span>
+    </div>
+    <div style="padding: 10px">
+        <label> Select tags:
+            {{ form.tags }}
+        </label>
+        <span>{{ form.errors.tags }}</span>
+    </div>
+    <div class="grid">
+        <button type="submit">Submit</button>
+        <button type="reset" class="secondary">Reset</button>
+    </div>
+</form>
+{% endblock %}

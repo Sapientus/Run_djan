@@ -1,0 +1,16 @@
+{% extends "quotesapp/base.html" %} {% load extract_tags %} {% block content %}
+
+<h1 style="color: rgb(255, 255, 255);">{{quote.name}}</h1>
+<p style="color: rgba(255, 255, 255, 0.593);">Description: <b>{{quote.description}}</b></p>
+<p style="color: rgba(255, 255, 255, 0.593);">Time of creation: <kbd>{{quote.created_date}}</kbd></p>
+<p style="color: rgba(255, 255, 255, 0.593);">Quote author: <kbd>{{quote.author}}</kbd></p>
+{% if quote.done %}
+<p style="color: rgba(255, 255, 255, 0.593);">
+    Status:
+    <ins>Completed</ins>
+</p>
+{% else %}
+<p style="color: rgba(255, 255, 255, 0.593);">Status: <i>Not implemented</i></p>
+{% endif %}
+<p style="color: rgba(255, 255, 255, 0.593);">Tags: <small> {{ quote.tags|tags }} </small></p>
+{% endblock %}

@@ -1,0 +1,10 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.post-thumb {
+    margin-bottom: 30px;
+    border: 2px dashed tomato;
+}
