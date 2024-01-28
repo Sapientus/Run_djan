@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css" />
 </head>
 
-<body style="background-color: rgb(4, 24, 83); text-emphasis-color: rgb(255, 255, 255);">
+<body style="background-color: rgb(4, 24, 83); color: rgb(255, 255, 255);">
     <main class="container">
         <nav style="margin-bottom: 20px; border-bottom: 2px solid; padding-left: 30px">
             {% if user.is_authenticated %}
@@ -30,30 +30,38 @@
         </nav>
         <h1 style="padding-left: 45%; color: rgb(255, 255, 255)">All quotes</h1>
         {% for quote in quotes %}
-        <ul style="padding-left: 45%">
+        {% if not quote.done and user.is_authenticated %}
+        <ul style="padding-left: 35%">
             <li>
-                {% if not quote.done and user.is_authenticated %}
                 <a href="{% url 'quotesapp:detail' quote.id %}" role="button" class="outline"> {{ quote.name }} </a>
                 <a href="{% url 'quotesapp:set_done' quote.id %}" role="button"> Mark Done </a>
                 <a href="{% url 'quotesapp:delete' quote.id %}" role="button" class="contrast"> Delete quote </a>
-                {% else %}
-                <a href="{% url 'quotesapp:detail' quote.id %}" role="button" class="secondary"><s>{{ quote.name }}</s></a>
-                {% endif %}
             </li>
         </ul>
+        {% else %}
+        <ul style="padding-left: 45%">
+            <li>
+                <a href="{% url 'quotesapp:detail' quote.id %}" role="button" class="secondary"><s>{{ quote.name }}</s></a>
+            </li>
+        </ul>
+        {% endif %}
         {% endfor %}
         <h1 style="padding-left: 45%; color: rgba(255, 255, 255, 0.836)">All authors</h1>
         {% for author in authors %}
-        <ul style="padding-left: 45%">
+        {% if user.is_authenticated %}
+        <ul style="padding-left: 35%">
             <li>
-                {% if user.is_authenticated %}
                 <a href="{% url 'quotesapp:lookfor' author.id %}" role="button" class=""><s>{{ author.name }}</s></a>
                 <a href="{% url 'quotesapp:remove' author.id %}" role="button" class="contrast"> Delete author </a>
-                {% else %}
-                <a href="{% url 'quotesapp:lookfor' author.id %}" role="button" class="secondary"><s>{{ author.name }}</s></a>
-                {% endif %}
             </li>
         </ul>
+        {% else %}
+        <ul style="padding-left: 45%">
+            <li>
+                <a href="{% url 'quotesapp:lookfor' author.id %}" role="button" class="secondary"><s>{{ author.name }}</s></a>
+            </li>
+        </ul>
+        {% endif %}
         {% endfor %}
     </main>
     <footer style="padding-bottom: 20px; border-bottom: 2px solid; padding-left: 45%">
