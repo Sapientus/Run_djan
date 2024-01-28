@@ -1,5 +1,7 @@
 # DAY 7 after the Farewell
 
+* I know, "doesnt goes" isn't correct but I'm too exhausted for beautiful correct words.
+
 I feel suffocated as if I was closed in a coffin deep inside the ground.
 Maybe it's because I supress emotions in order to be able to keep breathing.
 I wouldn't say that I've done a lot of things during these 7 days but I see the results.
