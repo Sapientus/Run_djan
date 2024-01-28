@@ -30,18 +30,24 @@
         </nav>
         <h1 style="padding-left: 45%; color: rgb(255, 255, 255)">All quotes</h1>
         {% for quote in quotes %}
-        {% if not quote.done and user.is_authenticated %}
+        {% if user.is_authenticated %}
         <ul style="padding-left: 35%">
             <li>
-                <a href="{% url 'quotesapp:detail' quote.id %}" role="button" class="outline"> {{ quote.name }} </a>
-                <a href="{% url 'quotesapp:set_done' quote.id %}" role="button"> Mark Done </a>
+                {% if quote.done %}
+                <a href="{% url 'quotesapp:detail' quote.id %}" role="button" class="outline" style="background-color: aqua; color: rgb(2, 3, 32)"> {{ quote.name }} </a>
                 <a href="{% url 'quotesapp:delete' quote.id %}" role="button" class="contrast"> Delete quote </a>
+                {% else %}
+                <a href="{% url 'quotesapp:detail' quote.id %}" role="button" class="outline"
+                    style="background-color: rgb(183, 61, 244); color: rgb(255, 255, 255)"> {{ quote.name }} </a>
+                <a href="{% url 'quotesapp:set_done' quote.id %}" role="button" style="background-color: rgb(64, 0, 255); color: rgb(255, 255, 255)"> Mark Done </a>
+                <a href="{% url 'quotesapp:delete' quote.id %}" role="button" class="contrast"> Delete quote </a>
+                {% endif %}
             </li>
         </ul>
         {% else %}
         <ul style="padding-left: 45%">
             <li>
-                <a href="{% url 'quotesapp:detail' quote.id %}" role="button" class="secondary"><s>{{ quote.name }}</s></a>
+                <a href="{% url 'quotesapp:detail' quote.id %}" role="button" class="secondary" style="background-color: aqua; color: rgb(2, 3, 32)">{{ quote.name }}</a>
             </li>
         </ul>
         {% endif %}
@@ -51,14 +57,14 @@
         {% if user.is_authenticated %}
         <ul style="padding-left: 35%">
             <li>
-                <a href="{% url 'quotesapp:lookfor' author.id %}" role="button" class=""><s>{{ author.name }}</s></a>
+                <a href="{% url 'quotesapp:lookfor' author.id %}" role="button" class="outline" style="background-color: aqua; color: rgb(2, 3, 32)">{{ author.name }}</a>
                 <a href="{% url 'quotesapp:remove' author.id %}" role="button" class="contrast"> Delete author </a>
             </li>
         </ul>
         {% else %}
         <ul style="padding-left: 45%">
             <li>
-                <a href="{% url 'quotesapp:lookfor' author.id %}" role="button" class="secondary"><s>{{ author.name }}</s></a>
+                <a href="{% url 'quotesapp:lookfor' author.id %}" role="button" class="outline" style="background-color: aqua; color: rgb(2, 3, 32)">{{ author.name }}</a>
             </li>
         </ul>
         {% endif %}
