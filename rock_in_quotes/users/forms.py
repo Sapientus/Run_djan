@@ -5,30 +5,32 @@ from .models import Profile
 
 
 class RegisterForm(UserCreationForm):
-    username = forms.CharField(max_length=100,
-                               required=True,
-                               widget=forms.TextInput())
+    username = forms.CharField(max_length=100, required=True, widget=forms.TextInput())
 
-    password1 = forms.CharField(max_length=50,
-                                required=True,
-                                widget=forms.PasswordInput())
-    password2 = forms.CharField(max_length=50,
-                                required=True,
-                                widget=forms.PasswordInput())
+    email = forms.CharField(max_length=100, required=True, widget=forms.TextInput())
+
+    password1 = forms.CharField(
+        max_length=50, required=True, widget=forms.PasswordInput()
+    )
+    password2 = forms.CharField(
+        max_length=50, required=True, widget=forms.PasswordInput()
+    )
 
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2']
+        fields = ["username", "password1", "password2"]
+
 
 class LoginForm(AuthenticationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'password']
+        fields = ["username", "password"]
+
 
 class ProfileForm(forms.ModelForm):
     avatar = forms.ImageField(widget=forms.FileInput())
 
     class Meta:
         model = Profile
-        fields = ['avatar']
+        fields = ["avatar"]
